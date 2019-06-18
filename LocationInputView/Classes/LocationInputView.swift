@@ -13,6 +13,7 @@ public class LocationInputView: UIView {
     
     public var delegate: LocationInputViewDelegate?
     
+    @IBOutlet weak var gear: UIActivityIndicatorView!
     @IBOutlet weak var placeIcon: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var locationLabel: UILabel!
@@ -160,7 +161,16 @@ extension LocationInputView: CLLocationManagerDelegate {
 
 extension LocationInputView: MKMapViewDelegate {
     
+    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        
+    }
+    
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        // change
+        locationLabel.isHidden = true
+        gear.isHidden = false
+        gear.startAnimating()
         
         let center = mapView.centerCoordinate
         let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
@@ -170,6 +180,11 @@ extension LocationInputView: MKMapViewDelegate {
                                                 
                                                 let place = places?.first
                                                 self.geocodingCompelete(placeMark: place)
+                                                
+                                                // restore
+                                                self.gear.stopAnimating()
+                                                self.gear.isHidden = true
+                                                self.locationLabel.isHidden = false
         })
         
     }
