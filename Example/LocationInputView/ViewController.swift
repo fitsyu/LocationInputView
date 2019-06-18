@@ -8,6 +8,7 @@
 
 import UIKit
 import LocationInputView
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
                            width:  view.frame.width,
                            height: view.frame.height * 0.45)
         let inputView = LocationInputView(frame: bounds)
+        inputView.delegate = self
         return inputView
     }
     
@@ -42,3 +44,25 @@ class ViewController: UIViewController {
     
 }
 
+
+extension ViewController: LocationInputViewDelegate {
+    
+    func didInputLocation(location: CLLocation, placemark: CLPlacemark?) {
+        let t: String = [
+                 placemark?.name,
+                 placemark?.subThoroughfare,
+                 placemark?.subLocality,
+                 placemark?.subAdministrativeArea,
+                 placemark?.administrativeArea,
+                 placemark?.country]
+            .compactMap { $0 }
+            .joined(separator: ", ")
+        
+        
+        self.locationTextField.text = t
+    }
+    
+    func didClose() {
+        self.locationTextField.resignFirstResponder()
+    }
+}
