@@ -1,0 +1,22 @@
+{
+  "name": "LocationInputView",
+  "version": "0.1.0",
+  "summary": "A short description of LocationInputView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/fitsyu/LocationInputView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "fitsyu": "fitsyu2@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/fitsyu/LocationInputView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "LocationInputView/Classes/**/*"
+}

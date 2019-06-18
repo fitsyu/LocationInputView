@@ -1,0 +1,27 @@
+PODS:
+  - LocationInputView (0.1.0)
+  - Nimble (8.0.2)
+  - Quick (2.1.0)
+
+DEPENDENCIES:
+  - LocationInputView (from `../`)
+  - Nimble
+  - Quick
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  LocationInputView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LocationInputView: ae9a4a62b083405786d7129027a92d2897308977
+  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+
+PODFILE CHECKSUM: fabac1d4d98891020dbe5444fe8fcd406400f433
+
+COCOAPODS: 1.6.1

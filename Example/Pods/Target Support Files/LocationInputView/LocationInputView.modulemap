@@ -1,0 +1,6 @@
+framework module LocationInputView {
+  umbrella header "LocationInputView-umbrella.h"
+
+  export *
+  module * { export * }
+}
