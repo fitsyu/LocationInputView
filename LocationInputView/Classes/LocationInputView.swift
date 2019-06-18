@@ -163,9 +163,17 @@ extension LocationInputView: MKMapViewDelegate {
     
     public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         
+        let targetingIcon = UIImage(podAssetName: "my_location")?
+            .withRenderingMode(.alwaysTemplate)
+        
+        self.placeIcon.image = targetingIcon
     }
     
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        let targetedIcon = UIImage(podAssetName: "place")?.withRenderingMode(.alwaysTemplate)
+        self.placeIcon.image = targetedIcon
+        self.placeIcon.transform = CGAffineTransform.identity
         
         // change
         locationLabel.isHidden = true
@@ -187,5 +195,20 @@ extension LocationInputView: MKMapViewDelegate {
                                                 self.locationLabel.isHidden = false
         })
         
+    }
+}
+
+extension UIImage {
+    
+    convenience init?(podAssetName: String) {
+        let podBundle = Bundle(for: LocationInputView.self)
+        
+        guard
+            let url = podBundle.url(forResource: "LocationInputView", withExtension: "bundle")
+            else {
+                return nil
+        }
+        
+        self.init(named: podAssetName, in: Bundle(url: url), compatibleWith: nil)
     }
 }
