@@ -153,6 +153,8 @@ public class LocationInputView: UIView {
         // set the wrapper
         let nc = UINavigationController(rootViewController: locationPicker)
         
+        self.navigationController = nc
+        
         // show it modally
         UIApplication.shared
             .topViewController()?
@@ -161,9 +163,7 @@ public class LocationInputView: UIView {
     
     // dismiss the modally presented LocationPicker
     @objc func closeLocationPicker() {
-        UIApplication.shared
-            .topViewController()?
-            .presentedViewController?.dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
     
@@ -176,6 +176,8 @@ public class LocationInputView: UIView {
             .joined(separator: ", ")
         self.locationLabel.text = text
     }
+    
+    var navigationController: UINavigationController?
 }
 
 
