@@ -30,18 +30,6 @@ class ViewController: UIViewController {
         locationTextField.inputView = locationView
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        locationTextField.becomeFirstResponder()
-    }
-    
-    @IBAction func close() {
-        locationTextField.resignFirstResponder()
-    }
-    
-    
-    
 }
 
 
@@ -50,8 +38,6 @@ extension ViewController: LocationInputViewDelegate {
     func didInputLocation(location: CLLocation, placemark: CLPlacemark?) {
         let t: String = [
                  placemark?.name,
-                 placemark?.subThoroughfare,
-                 placemark?.subLocality,
                  placemark?.subAdministrativeArea,
                  placemark?.administrativeArea,
                  placemark?.country]

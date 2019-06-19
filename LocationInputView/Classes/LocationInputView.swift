@@ -139,7 +139,12 @@ public class LocationInputView: UIView {
     @objc func geocodingCompelete(placeMark: CLPlacemark?) {
         self.placeMark = placeMark
         
-        let text = [placeMark?.name, placeMark?.subLocality, placeMark?.country]
+        let text = [placeMark?.name,
+                    placeMark?.subLocality,
+                    placeMark?.subAdministrativeArea,
+                    placeMark?.administrativeArea,
+                    placeMark?.country
+                ]
             .compactMap { $0 }
             .joined(separator: ", ")
         self.locationLabel.text = text
