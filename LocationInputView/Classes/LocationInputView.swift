@@ -1,6 +1,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import LocationPicker
 
 public protocol LocationInputViewDelegate {
     
@@ -64,7 +65,8 @@ public class LocationInputView: UIView {
         self.addSubview(view)
         
         searchTextField.inputView = UIView()
-        searchTextField.becomeFirstResponder()
+        searchTextField.addTarget(self, action: #selector(openLocationPicker), for: .editingDidBegin)
+
         
         
         locman.requestWhenInUseAuthorization()
@@ -105,8 +107,8 @@ public class LocationInputView: UIView {
         if let center = locman.location?.coordinate {
             
             let region = MKCoordinateRegion(center: center,
-                                            latitudinalMeters: 50,
-                                            longitudinalMeters: 50)
+                                            latitudinalMeters: 100,
+                                            longitudinalMeters: 100)
             
             self.mapView.setRegion(region, animated: true)
             
@@ -123,12 +125,47 @@ public class LocationInputView: UIView {
     
     @objc func maximise() {
         
-        // not working
-//        print(self.frame)
-//        self.frame.size.height += 200
-//        self.layoutIfNeeded()
-//        self.setNeedsLayout()
+
     }
+    
+    @objc func openLocationPicker() {
+        
+        // setup the location picker
+        let locationPicker = LocationPickerViewController()
+        locationPicker.mapType = .standard
+        locationPicker.completion = { locationAnnotation in
+            
+            if let location = locationAnnotation?.location {
+                
+                let region = MKCoordinateRegion(center: location.coordinate,
+                                                latitudinalMeters: 100,
+                                                longitudinalMeters: 100)
+                
+                self.mapView.setRegion(region, animated: true)
+            }
+        }
+        
+        
+        // add cancel button to dismiss it
+        locationPicker.navigationItem.leftBarButtonItem =
+            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeLocationPicker))
+        
+        // set the wrapper
+        let nc = UINavigationController(rootViewController: locationPicker)
+        
+        // show it modally
+        UIApplication.shared
+            .topViewController()?
+            .present(nc, animated: true, completion: {})
+    }
+    
+    // dismiss the modally presented LocationPicker
+    @objc func closeLocationPicker() {
+        UIApplication.shared
+            .topViewController()?
+            .presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+
     
     var placeMark: CLPlacemark?
     @objc func geocodingCompelete(placeMark: CLPlacemark?) {
@@ -210,5 +247,22 @@ extension UIImage {
         }
         
         self.init(named: podAssetName, in: Bundle(url: url), compatibleWith: nil)
+    }
+}
+
+
+extension UIApplication {
+    
+    func topViewController() -> UIViewController? {
+        
+        var top: UIViewController?
+        
+        top = UIApplication.shared.keyWindow?.rootViewController
+        
+        while let child = top?.presentedViewController {
+            top = child
+        }
+        
+        return top
     }
 }

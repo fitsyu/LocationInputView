@@ -1,15 +1,19 @@
 PODS:
-  - LocationInputView (0.1.0)
+  - LocationInputView (0.1.0):
+    - LocationPicker
+  - LocationPicker (1.2.0)
   - Nimble (8.0.2)
   - Quick (2.1.0)
 
 DEPENDENCIES:
   - LocationInputView (from `../`)
+  - LocationPicker
   - Nimble
   - Quick
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - LocationPicker
     - Nimble
     - Quick
 
@@ -18,10 +22,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LocationInputView: b24dbe618ab19e224d60aab8a44f70dbda42a1d2
+  LocationInputView: 67991da3232ba7cad819d27d71c45af0ff8bf062
+  LocationPicker: d91f9fe50493d8058391fe1408aa2a8db49a584d
   Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
   Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
 
-PODFILE CHECKSUM: fabac1d4d98891020dbe5444fe8fcd406400f433
+PODFILE CHECKSUM: 1534459a880a1c05adc22d744336db030d0765d1
 
 COCOAPODS: 1.6.1

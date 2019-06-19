@@ -24,5 +24,10 @@
     "LocationInputView": [
       "LocationInputView/Assets/*"
     ]
+  },
+  "dependencies": {
+    "LocationPicker": [
+
+    ]
   }
 }

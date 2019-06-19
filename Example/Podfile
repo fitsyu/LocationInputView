@@ -1,7 +1,9 @@
+platform :ios, '10.0'
 use_frameworks!
 
 target 'LocationInputView_Example' do
   pod 'LocationInputView', :path => '../'
+  pod 'LocationPicker'
 
   target 'LocationInputView_Tests' do
     inherit! :search_paths
