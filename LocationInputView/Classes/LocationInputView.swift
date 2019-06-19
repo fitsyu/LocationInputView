@@ -159,6 +159,9 @@ public class LocationInputView: UIView {
                                                 longitudinalMeters: 100)
                 
                 self.mapView.setRegion(region, animated: true)
+                
+                self.delegate?.didInputLocation(location: location,
+                                                placemark: locationAnnotation?.placemark)
             }
         }
         
