@@ -8,6 +8,7 @@ public class LocationInputView: UIView {
     
     public var delegate: LocationInputViewDelegate?
     
+    // MARK: Outlets
     @IBOutlet weak var gear: UIActivityIndicatorView!
     @IBOutlet weak var placeIcon: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
@@ -19,6 +20,11 @@ public class LocationInputView: UIView {
     
     @IBOutlet weak var useButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
+    
+    // MARK: Internal Properties
+    private var placeMark: CLPlacemark?
+    
+    private var navigationController: UINavigationController?
     
     private var locman = CLLocationManager()
     
@@ -39,6 +45,8 @@ public class LocationInputView: UIView {
         return bundle!
     }()
     
+    
+    // MARK: Construction
     public override init(frame: CGRect) {
         super.init(frame: frame)
         awakeFromNib()
@@ -93,6 +101,8 @@ public class LocationInputView: UIView {
         placeIcon.image = placeIcon.image?.withRenderingMode(.alwaysTemplate)
     }
     
+    
+    // MARK: Targets
     @objc func close() {
         delegate?.didClose()
     }
@@ -120,6 +130,15 @@ public class LocationInputView: UIView {
     @objc func maximise() {
         
 
+    }
+    
+    @objc func geocodingCompelete(placeMark: CLPlacemark?) {
+        self.placeMark = placeMark
+        
+        let text = [placeMark?.name, placeMark?.subLocality, placeMark?.country]
+            .compactMap { $0 }
+            .joined(separator: ", ")
+        self.locationLabel.text = text
     }
     
     @objc func openLocationPicker() {
@@ -160,18 +179,6 @@ public class LocationInputView: UIView {
         navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    
-    var placeMark: CLPlacemark?
-    @objc func geocodingCompelete(placeMark: CLPlacemark?) {
-        self.placeMark = placeMark
-        
-        let text = [placeMark?.name, placeMark?.subLocality, placeMark?.country]
-            .compactMap { $0 }
-            .joined(separator: ", ")
-        self.locationLabel.text = text
-    }
-    
-    var navigationController: UINavigationController?
 }
 
 
