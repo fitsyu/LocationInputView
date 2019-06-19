@@ -3,12 +3,6 @@ import CoreLocation
 import MapKit
 import LocationPicker
 
-public protocol LocationInputViewDelegate {
-    
-    func didInputLocation(location: CLLocation, placemark: CLPlacemark?)
-    
-    func didClose()
-}
 
 public class LocationInputView: UIView {
     
@@ -234,37 +228,5 @@ extension LocationInputView: MKMapViewDelegate {
                                                 self.locationLabel.isHidden = false
         })
         
-    }
-}
-
-extension UIImage {
-    
-    convenience init?(podAssetName: String) {
-        let podBundle = Bundle(for: LocationInputView.self)
-        
-        guard
-            let url = podBundle.url(forResource: "LocationInputView", withExtension: "bundle")
-            else {
-                return nil
-        }
-        
-        self.init(named: podAssetName, in: Bundle(url: url), compatibleWith: nil)
-    }
-}
-
-
-extension UIApplication {
-    
-    func topViewController() -> UIViewController? {
-        
-        var top: UIViewController?
-        
-        top = UIApplication.shared.keyWindow?.rootViewController
-        
-        while let child = top?.presentedViewController {
-            top = child
-        }
-        
-        return top
     }
 }
