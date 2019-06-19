@@ -129,7 +129,11 @@ public class LocationInputView: UIView {
     
     @objc func maximise() {
         
-
+        var region = mapView.region
+        region.span.latitudeDelta += 10
+        region.span.longitudeDelta += 10
+        
+        mapView.setRegion(region, animated: true)
     }
     
     @objc func geocodingCompelete(placeMark: CLPlacemark?) {
