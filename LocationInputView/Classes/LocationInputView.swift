@@ -22,6 +22,7 @@ public class LocationInputView: UIView {
     @IBOutlet weak var searchTextField: UITextField!
     
     // MARK: Internal Properties
+    private var location: CLLocation?
     private var placeMark: CLPlacemark?
     
     private var navigationController: UINavigationController?
@@ -122,7 +123,7 @@ public class LocationInputView: UIView {
     }
     
     @objc func insertLocation() {
-        if let location = locman.location {
+        if let location = self.location {
             delegate?.didInputLocation(location: location, placemark: self.placeMark)
         }
     }
@@ -234,6 +235,8 @@ extension LocationInputView: MKMapViewDelegate {
         
         let center = mapView.centerCoordinate
         let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        
+        self.location = location
         
         CLGeocoder().reverseGeocodeLocation(location,
                                             completionHandler: { (places, error) in
