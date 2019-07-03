@@ -131,8 +131,8 @@ public class LocationInputView: UIView {
     @objc func maximise() {
         
         var region = mapView.region
-        region.span.latitudeDelta += 10
-        region.span.longitudeDelta += 10
+        region.span.latitudeDelta  += 0.01
+        region.span.longitudeDelta += 0.01
         
         mapView.setRegion(region, animated: true)
     }
@@ -161,8 +161,8 @@ public class LocationInputView: UIView {
             if let location = locationAnnotation?.location {
                 
                 let region = MKCoordinateRegion(center: location.coordinate,
-                                                latitudinalMeters: 100,
-                                                longitudinalMeters: 100)
+                                                latitudinalMeters: 600,
+                                                longitudinalMeters: 600)
                 
                 self.mapView.setRegion(region, animated: true)
                 
